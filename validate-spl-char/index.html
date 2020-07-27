@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+</head>
+<body>
+    <h4>Jquery Validation - Validate Special Characters</h4>
+    <h5>Non Reg. Exp. based</h5>
+    <p>
+
+    </p>
+    
+    <form action="" method="POST" role="form" id="test-frm">
+        <legend>Form title</legend>
+    
+        <div class="form-group">
+            <label for="">label</label>
+            <input type="text" class="form-control" name="testInput" placeholder="Input field">
+        </div>
+    
+        
+    
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <script src="https://code.jquery.com/jquery-1.7.2.min.js" integrity="sha256-R7aNzoy2gFrVs+pNJ6+SokH04ppcEqJ0yFLkNGoFALQ=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/additional-methods.js"></script>
+    <script>
+        jQuery.validator.addMethod("notAllowedChars", function(value, element) {
+            const chars = ['^','<','>','!','}','{'];
+            for(char of value){
+                if(chars.includes(char)){
+                    return false;
+                }
+            }
+            return true;
+        }, 'Use of special characters is not allowed.');
+
+        $(function(){
+            $("#test-frm").validate({
+                rules:{
+                    testInput:{
+                        required:true,
+                        notAllowedChars:true
+                    }
+                }
+            });
+        });
+    </script>
+    
+</body>
+</html>
